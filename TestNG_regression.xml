@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+	<test name="Test">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGAnnotations">
+				<methods>
+					<exclude name="SecondTestCase"></exclude>
+				</methods>
+			</class>
+			
+			<class name="testNG.LoginFactory">
+			</class>
+			
+			<class name="testNG.TestNGAnnotationsParameters">
+			</class>
+			
+		</classes>
+	</test>
+</suite> <!-- Suite -->

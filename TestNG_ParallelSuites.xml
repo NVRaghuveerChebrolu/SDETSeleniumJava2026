@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="tests" thread-count="2" name="Suite">
+	<test name="regression">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGClass1">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="sanity">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGClass2">
+			</class>
+
+			<class name="testNG.TestNGClass3">
+			</class>
+
+		</classes>
+	</test>
+</suite> <!-- Suite -->

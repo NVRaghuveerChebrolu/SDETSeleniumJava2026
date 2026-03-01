@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="methods" thread-count="2" name="Suite">
+	<test name="Test">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGClass1">
+				<methods>
+					<include name="testCase1"></include>
+					<include name="testCase2"></include>
+				</methods>
+			</class>
+
+		</classes>
+	</test>
+</suite> <!-- Suite -->
