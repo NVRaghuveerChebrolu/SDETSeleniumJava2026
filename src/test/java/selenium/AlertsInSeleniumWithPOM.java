@@ -1,9 +1,13 @@
 package selenium;
 
+import java.time.Duration;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.pages.AlertsPOM;
 
@@ -18,6 +22,11 @@ public class AlertsInSeleniumWithPOM {
 		objAlertPOM.ConsentPopUp.click();
 		
 		objAlertPOM.NormalAlert.click();
+		
+		//Explicit Wait : Applicable for one webElement.
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.alertIsPresent());
+		
 		Alert objAlert = driver.switchTo().alert();
 		String TextOfNormalAlert = objAlert.getText();
 		System.out.println("TextOfNormalAlert:"+TextOfNormalAlert);

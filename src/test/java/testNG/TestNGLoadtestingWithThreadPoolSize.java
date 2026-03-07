@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class TestNGLoadtestingWithThreadPoolSize {
 	
-	@Test()
+	@Test(groups= {"regression"})
 	public void testCase1() {
 		System.out.println("inside testCase1");
 	}
@@ -23,7 +23,7 @@ public class TestNGLoadtestingWithThreadPoolSize {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://google.com");
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.findElement(By.xpath("(//div[@class='QS5gu sy4vM'])[2]")).click();
 		driver.findElement(By.xpath("//textarea[@title = 'Suche']")).sendKeys("automation testing");
 		driver.close();

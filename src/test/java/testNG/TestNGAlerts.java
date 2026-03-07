@@ -1,14 +1,20 @@
 package testNG;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -18,7 +24,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.pages.AlertsPOM;
 
-public class TestNGAnnotations {
+public class TestNGAlerts {
 	public WebDriver driver;
 	
 
@@ -50,6 +56,33 @@ public class TestNGAnnotations {
 		String TextOfNormalAlert = objAlert.getText();
 		System.out.println("TextOfNormalAlert:"+TextOfNormalAlert);
 		objAlert.accept();
+	}
+	
+	@Test(priority=3,dependsOnMethods= {"validateNormalAlert"},retryAnalyzer=RetryAnalyzer.class)
+	public void ConformBoxAlert() {
+		System.out.println("inside ConformBoxAlert");
+		AlertsPOM objAlertPOM = new AlertsPOM(driver);
+		objAlertPOM.CancelTab.click();
+		objAlertPOM.ConformBoxAlert.click();
+		Alert objAlert = driver.switchTo().alert();
+		objAlert.dismiss();;
+		String messageForCancel =objAlertPOM.messageAfterCancel.getText();
+		System.out.println("messageForCancel:"+messageForCancel);
+		Assert.assertEquals(messageForCancel, "You Pressed Cance");
+	}
+	
+	@Test(priority=4,dependsOnMethods= {"ConformBoxAlert"})
+	public void PromptBoxAlert() {
+		System.out.println("inside PromptBoxAlert");
+		AlertsPOM objAlertPOM = new AlertsPOM(driver);
+		objAlertPOM.AlertwithTextBoxButton.click();
+		objAlertPOM.promptBoxAlert.click();
+		Alert objAlert = driver.switchTo().alert();
+		objAlert.sendKeys("I am automating alerts");
+		objAlert.accept();
+		String MessageOfTextBox = objAlertPOM.MessageAfterAcceptingPromptBoxAlert.getText(); 
+		System.out.println("MessageOfTextBox:"+MessageOfTextBox);
+		Assert.assertEquals(MessageOfTextBox, "Hello I am automating alerts How are you today");
 	}
 	
 	
@@ -106,13 +139,34 @@ public class TestNGAnnotations {
 	
 	
 	@org.testng.annotations.AfterMethod
-	public void AfterMethod() {
+	public void AfterMethod(ITestResult result) {
 		System.out.println("inside After Method");
+		ValidatingTheResultOfTestCase(result);
 	}
 	
+	public void ValidatingTheResultOfTestCase(ITestResult result) {
+		if(result.getStatus()==ITestResult.FAILURE) {
+			takeScreenShot(result);
+		}
+	}
+	
+	private void takeScreenShot(ITestResult result) {
+		TakesScreenshot ts = (TakesScreenshot)driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		File destination = new File(System.getProperty("user.dir")+"//src//test//resources//ScreenShots//"+result.getName()+".png");
+		try {
+			FileHandler.copy(source, destination);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 	@AfterClass
 	public void Afterclass() {
 		System.out.println("inside After Class");
+		driver.quit();
 	}
 	
 	

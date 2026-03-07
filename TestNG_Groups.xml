@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="methods" thread-count="2" name="Suite">
+	<groups>
+		<run>
+			<include name="regression"></include>
+		</run>
+	</groups>
+	<test name="Test">
+		<classes>
+			<class name="testNG.TestNGAnnotations"/>
+			<class name="testNG.TestNGLoadtestingWithThreadPoolSize"/>
+			<class name="testNG.TestNGClass1"/>
+		</classes>
+	</test>
+</suite> <!-- Suite -->

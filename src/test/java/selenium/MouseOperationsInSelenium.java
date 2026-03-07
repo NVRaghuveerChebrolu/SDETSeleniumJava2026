@@ -1,11 +1,15 @@
 package selenium;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MouseOperationsInSelenium {
 
@@ -37,6 +41,11 @@ public class MouseOperationsInSelenium {
 		WebElement frameElement1 = driver.findElement(By.xpath("//iframe"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", frameElement1);
+		
+		//Explicit Wait : Applicable for one webElement.
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameElement1));
+		
 		driver.switchTo().frame(frameElement1);
 
 		WebElement BlueBox = driver

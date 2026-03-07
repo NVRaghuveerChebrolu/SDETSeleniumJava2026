@@ -12,7 +12,7 @@ public class TestNGClass1 {
 		System.out.println("Thread ID from Class1:"+Thread.currentThread().getId());
 	}
 	
-	@Test
+	@Test(groups= {"regression"})
 	public void testCase2() {
 		System.out.println("inside testCase2 inside TestNGClass1");
 		System.out.println("Thread ID from Class1:"+Thread.currentThread().getId());

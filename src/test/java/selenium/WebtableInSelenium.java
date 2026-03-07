@@ -1,5 +1,6 @@
 package selenium;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -7,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebtableInSelenium {
 	public static void main(String[] args) {
@@ -17,6 +20,11 @@ public class WebtableInSelenium {
 	JavascriptExecutor js = (JavascriptExecutor)driver;
 	js.executeScript("arguments[0].scrollIntoView(true);", table);
 	String FirstName ="Brenden";
+	
+	//Explicit Wait : Applicable for one webElement.
+	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+	wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//table[@id='example']/tbody/tr")));
+					
 	List<WebElement> AllRows = driver.findElements(By.xpath("//table[@id='example']/tbody/tr"));
 	System.out.println("AllRows:"+AllRows.size());
 	for(int row=1;row <= AllRows.size();row++){

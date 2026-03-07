@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+
+<!-- 	<test name="Test">
+	<parameter name = "browser" value = "chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGAnnotations">
+				<methods>
+					<exclude name="SecondTestCase"></exclude>
+				</methods>
+			</class>
+		</classes>
+	</test> Test -->
+	
+	<test name="Test">
+	<parameter name = "browserName" value = "edge"></parameter>
+		<classes>
+			<class name="testNG.TestNGAnnotationsParameters">
+				<methods>
+					<!-- <exclude name="SecondTestCase"></exclude> -->
+				</methods>
+			</class>
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
