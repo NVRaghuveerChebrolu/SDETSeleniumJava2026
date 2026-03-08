@@ -55,7 +55,6 @@ public class FileUpload {
 		objRobot.keyPress(KeyEvent.VK_ENTER);
 		objRobot.keyRelease(KeyEvent.VK_ENTER);
 		
-		
 	}
 
 }

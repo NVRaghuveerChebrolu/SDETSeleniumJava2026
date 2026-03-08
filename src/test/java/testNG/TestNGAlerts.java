@@ -22,16 +22,16 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.Utility.Library;
 import com.pages.AlertsPOM;
 
-public class TestNGAlerts {
-	public WebDriver driver;
+public class TestNGAlerts extends Library{
 	
 
 	@Test(priority=1,groups= {"regression"})
-	public void launchBrowser() {
+	public void launchingAlertsURL() {
 		System.out.println("inside launch browser method");
-		driver = new ChromeDriver();
+		LaunchBrowser();
 		driver.get("https://demo.automationtesting.in/Alerts.html");
 		driver.manage().window().maximize();
 		String TitleOfAlertsPage= driver.getTitle();
@@ -144,24 +144,7 @@ public class TestNGAlerts {
 		ValidatingTheResultOfTestCase(result);
 	}
 	
-	public void ValidatingTheResultOfTestCase(ITestResult result) {
-		if(result.getStatus()==ITestResult.FAILURE) {
-			takeScreenShot(result);
-		}
-	}
-	
-	private void takeScreenShot(ITestResult result) {
-		TakesScreenshot ts = (TakesScreenshot)driver;
-		File source = ts.getScreenshotAs(OutputType.FILE);
-		File destination = new File(System.getProperty("user.dir")+"//src//test//resources//ScreenShots//"+result.getName()+".png");
-		try {
-			FileHandler.copy(source, destination);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+
 
 	@AfterClass
 	public void Afterclass() {

@@ -1,5 +1,6 @@
 package selenium;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.Alert;
@@ -9,14 +10,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.Utility.Library;
 import com.pages.AlertsPOM;
 
-public class AlertsInSeleniumWithPOM {
+public class AlertsInSeleniumWithPOM extends Library{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		WebDriver driver = new ChromeDriver();
-		driver.get("https://demo.automationtesting.in/Alerts.html");
+		Library objLibrary = new Library();
+		objLibrary.LaunchBrowser();
+		ReadPropertiesFile();
+		driver.get(objProp.getProperty("AlertsURL"));
 		driver.manage().window().maximize();
 		AlertsPOM objAlertPOM = new AlertsPOM(driver);
 		objAlertPOM.ConsentPopUp.click();
