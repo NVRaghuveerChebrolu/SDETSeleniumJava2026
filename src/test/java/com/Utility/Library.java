@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -15,7 +19,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 
 public class Library {
@@ -26,6 +33,38 @@ public class Library {
 	public void LaunchBrowser() {
 		System.out.println("inside launchBrowser");
 		driver= new ChromeDriver();
+	}
+	
+	
+	public void LaunchBrowserInSeleniumGrid(String browserName) {
+		
+		if(browserName.equalsIgnoreCase("chrome")) {
+			ChromeOptions options = new ChromeOptions();
+			Map<String,Object> ChromePreferences = new HashMap<String,Object>();
+			ChromePreferences.put("download.default_directory", System.getProperty("user.dir"));
+			options.addArguments("--disable-pop-up-blocking");
+			options.setExperimentalOption("prefs", ChromePreferences);
+			try {
+				driver= new RemoteWebDriver(new URL("http://localhost:4444"),options);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(browserName.equalsIgnoreCase("edge")) {
+			EdgeOptions options = new EdgeOptions();
+			Map<String,Object> edgePreferences = new HashMap<String,Object>();
+			edgePreferences.put("download.default_directory", System.getProperty("user.dir"));
+			options.addArguments("--disable-pop-up-blocking");
+			options.setExperimentalOption("prefs", edgePreferences);
+			try {
+				driver= new RemoteWebDriver(new URL("http://localhost:4444"),options);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 	
 	public void ValidatingTheResultOfTestCase(ITestResult result) {
@@ -98,6 +137,10 @@ public class Library {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void PageLoadTimeOut(int seconds) {
+		  driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(seconds));
 	}
 
 

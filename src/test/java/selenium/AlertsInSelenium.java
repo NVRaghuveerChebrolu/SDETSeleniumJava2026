@@ -11,7 +11,8 @@ public class AlertsInSelenium extends Library{
 //Example of Modular FrameWork
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		Library obj = new Library();
+		obj.LaunchBrowser();
 		driver.get("https://demo.automationtesting.in/Alerts.html");
 		driver.manage().window().maximize();
 		driver.findElement(By.xpath("//p[text()='Consent']")).click();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="classes" thread-count="2" name="Suite">
+	<test name="Test">
+		<parameter name="browserName" value="chrome"></parameter>
+		<classes>
+			<class name="testNG.TestNGAlertsGrid">
+				<methods>
+					<!-- <exclude name="SecondTestCase"></exclude> -->
+				</methods>
+			</class>
+
+			<class name="selenium.FramesAndWindowsSeleniumGrid">
+			</class>
+
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

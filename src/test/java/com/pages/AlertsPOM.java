@@ -38,5 +38,8 @@ public class AlertsPOM {
 	
 	@FindBy(xpath="//p[@id='demo1']")
 	public WebElement MessageAfterAcceptingPromptBoxAlert;
+	
+	@FindBy(xpath="//p[@id='demo']")
+	public WebElement MessageAfterAcceptingConformBoxAlert;
 
 }
