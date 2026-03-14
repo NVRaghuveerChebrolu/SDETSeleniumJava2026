@@ -31,7 +31,7 @@ public class TestNGAlerts extends Library{
 	@Test(priority=1,groups= {"regression"})
 	public void launchingAlertsURL() {
 		System.out.println("inside launch browser method");
-		LaunchBrowser();
+		
 		driver.get("https://demo.automationtesting.in/Alerts.html");
 		driver.manage().window().maximize();
 		String TitleOfAlertsPage= driver.getTitle();
@@ -47,7 +47,7 @@ public class TestNGAlerts extends Library{
 		objSoftAssert.assertAll();
 	}
 	
-	@Test(priority=2,dependsOnMethods= {"launchBrowser"},groups= {"regression"})
+	@Test(priority=2,dependsOnMethods= {"launchingAlertsURL"},groups= {"regression"})
 	public void validateNormalAlert() {
 		System.out.println("inside validateNormalAlert");
 		AlertsPOM objAlertPOM = new AlertsPOM(driver);
@@ -124,6 +124,7 @@ public class TestNGAlerts extends Library{
 	@BeforeClass
 	public void Beforeclass() {
 		System.out.println("inside Before Class");
+		LaunchBrowser();
 	}
 	
 	
