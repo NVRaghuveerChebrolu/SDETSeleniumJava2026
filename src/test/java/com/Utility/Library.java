@@ -44,6 +44,15 @@ public class Library {
 			ChromePreferences.put("download.default_directory", System.getProperty("user.dir"));
 			options.addArguments("--disable-pop-up-blocking");
 			options.setExperimentalOption("prefs", ChromePreferences);
+			
+			/*
+			 * visit below url and download the Selenium Grid jar File.
+			 * https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.41.0 open Git
+			 * Bash or terminal and go into the location where jar file is avaialble.
+			 * Execute below command java -jar selenium-server-4.41.0.jar standalone
+			 * Selenium Grid will point port number 4444
+			 */
+			
 			try {
 				driver= new RemoteWebDriver(new URL("http://localhost:4444"),options);
 			} catch (MalformedURLException e) {

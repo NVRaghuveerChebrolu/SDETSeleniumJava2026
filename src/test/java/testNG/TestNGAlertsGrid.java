@@ -31,11 +31,13 @@ public class TestNGAlertsGrid extends Library{
 
 	@Parameters({"browserName"})
 	@Test(priority=1,groups= {"regression"})
-	public void launchingAlertsURL(String browserFromPomXML) {
+	public void launchingAlertsURL(String browserFromPomXML) throws IOException {
 		System.out.println("inside launch browser method");
+		ReadPropertiesFile();
 		LaunchBrowserInSeleniumGrid(browserFromPomXML);
-		driver.get("https://demo.automationtesting.in/Alerts.html");
+		driver.get(objProp.getProperty("AlertsURL"));
 		driver.manage().window().maximize();
+		PageLoadTimeOut(30);
 		String TitleOfAlertsPage= driver.getTitle();
 		SoftAssert objSoftAssert = new SoftAssert();
 		
@@ -67,7 +69,7 @@ public class TestNGAlertsGrid extends Library{
 		objAlertPOM.CancelTab.click();
 		objAlertPOM.ConformBoxAlert.click();
 		Alert objAlert = driver.switchTo().alert();
-		objAlert.dismiss();;
+		objAlert.dismiss();
 		String messageForCancel =objAlertPOM.messageAfterCancel.getText();
 		System.out.println("messageForCancel:"+messageForCancel);
 		Assert.assertEquals(messageForCancel, "You Pressed Cance");
